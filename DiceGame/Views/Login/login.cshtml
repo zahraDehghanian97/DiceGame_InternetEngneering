@@ -1,0 +1,24 @@
+﻿@model DiceGame.Models.User
+@{
+    ViewBag.Title = "login";
+}
+
+<h2>login</h2>
+@using (Html.BeginForm("Index", "Login"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName)
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password)
+        @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+
+}
+<br />
+
+@Html.ActionLink("sign in as a guest", "GuestIndex", "Home")

@@ -1,0 +1,31 @@
+﻿@model DiceGame.Models.User
+@{
+    ViewBag.Title = "DesignGame";
+}
+
+<h2>DesignGame</h2>
+@using (Html.BeginForm("Index", "Login"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.Label("1.Maximum Of Score:")
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("2.Write the current score zero when dice appear:")
+        @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("3.Play with this number of dice:")
+        <br />
+        1:   @Html.RadioButton("diceNum", "1")
+        2: @Html.RadioButton("diceNum", "2")
+        3:   @Html.RadioButton("diceNum", "3")
+        4: @Html.RadioButton("diceNum", "4")
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}
