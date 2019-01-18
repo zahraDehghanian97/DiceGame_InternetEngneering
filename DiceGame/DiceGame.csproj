@@ -155,14 +155,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901021138181_InitialModel.cs" />
-    <Compile Include="Migrations\201901021138181_InitialModel.Designer.cs">
-      <DependentUpon>201901021138181_InitialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901161606548_InitialCreate.cs" />
-    <Compile Include="Migrations\201901161606548_InitialCreate.Designer.cs">
-      <DependentUpon>201901161606548_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\UserComment.cs" />
@@ -221,6 +213,9 @@
     <Content Include="Views\Shared\_MyLayout2.cshtml" />
     <Content Include="Views\Home\EditProfile.cshtml" />
     <Content Include="Views\Home\DesignGame.cshtml" />
+    <Content Include="Views\Home\UserReviewAdminIndex.cshtml" />
+    <Content Include="Views\Home\GameReviewAdminIndex.cshtml" />
+    <Content Include="Views\Login\logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -240,14 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901021138181_InitialModel.resx">
-      <DependentUpon>201901021138181_InitialModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901161606548_InitialCreate.resx">
-      <DependentUpon>201901161606548_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

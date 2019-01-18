@@ -31,6 +31,7 @@ namespace DiceGame.Models
         public string BirthDay { get; set; }
         public string Gender { get; set; }
         public string Email { get; set; }
+        public int age { get; set; }
         public Nullable<int> WinNum { get; set; }
         public Nullable<int> RateTotal { get; set; }
         public Nullable<int> RateNum { get; set; }

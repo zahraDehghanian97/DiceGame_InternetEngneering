@@ -9,7 +9,9 @@ namespace DiceGame.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+            ContextKey = "DiceGame.Models.DiceModel";
         }
 
         protected override void Seed(DiceGame.Models.DiceModel context)
