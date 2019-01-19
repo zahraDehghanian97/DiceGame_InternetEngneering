@@ -26,8 +26,8 @@ namespace DiceGame.Models
     }
 
         public int Id { get; set; }
-        public int Player1Id { get; set; }
-        public int Player2Id { get; set; }
+        public string Player1User { get; set; }
+        public string Player2User { get; set; }
         public int Current1 { get; set; }
         public int Current2 { get; set; }
         public int Score1 { get; set; }

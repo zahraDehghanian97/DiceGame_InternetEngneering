@@ -18,7 +18,6 @@ namespace DiceGame.Controllers
         }
         public ActionResult login()
         {
-
             return View();
         }
         [HttpPost]
@@ -28,12 +27,14 @@ namespace DiceGame.Controllers
             if (usr != null)
             {
                 _context.Users.Remove(usr);
+                _context.SaveChanges();
                 usr.Online = 1;
                 _context.Users.Add(usr);
                 _context.SaveChanges();
-                Session["designedGame"] = _context.DesignedGames.Where(d => d.DesignerId == usr.Id).ToList();
-                Session["finishedGame1"] = _context.FinishedGames.Where(d => d.Player1Id == usr.Id ).ToList();
-                Session["finishedGame2"] = _context.FinishedGames.Where(d => d.Player2Id == usr.Id).ToList();
+                Session["username"] = _context.Users.Where(u => u.UserName == usr.UserName);
+                Session["designedGame"] = _context.DesignedGames.Where(d => d.DesignerUser == usr.UserName).ToList();
+                Session["finishedGame1"] = _context.FinishedGames.Where(d => d.Player1User == usr.UserName ).ToList();
+                Session["finishedGame2"] = _context.FinishedGames.Where(d => d.Player2User == usr.UserName).ToList();
                 Session["usr"] = usr;
               //  Session["playedGame"]= _context.
                 return RedirectToAction("Index", "Home");
@@ -59,6 +60,7 @@ namespace DiceGame.Controllers
         [HttpPost]
         public ActionResult signup(User userModel)
         {
+            Session["username"] = userModel.UserName;
             Session["usr"] = userModel;
             userModel.Online = 1;
             _context.Users.Add(userModel);
@@ -74,16 +76,19 @@ namespace DiceGame.Controllers
         [HttpPost]
         public ActionResult Logout()
         {
-            User usr = _context.Users.Where(u =>u.UserName == Session["Username"].ToString()).FirstOrDefault();
-            if ( User!= null)
+            var x = (string)Session["username"];
+            User usr = _context.Users.Where(u => u.UserName == x).FirstOrDefault();
+            if ( usr!= null)
             {
                 _context.Users.Remove(usr);
+                _context.SaveChanges();
                 usr.Online = 0;
                 _context.Users.Add(usr);
                 _context.SaveChanges();
 
 
             }
+            Session.Clear();
             return View();
         }
 

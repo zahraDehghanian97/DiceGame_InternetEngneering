@@ -18,8 +18,8 @@ namespace DiceGame.Models
 
         }
         public int Id { get; set; }
-        public int CommenterId { get; set; }
-        public int UserId { get; set; }
+        public string CommenterUser { get; set; }
+        public string User { get; set; }
         public String Comment { get; set; }
         public string date { get; set; }
         public int flag { get; set; }

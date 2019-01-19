@@ -22,7 +22,7 @@ namespace DiceGame.Models
         }
 
         public int Id { get; set; }
-        public int DesignerId { get; set; }
+        public string DesignerUser { get; set; }
         public int CountPlayed { get; set; }
         public int TotalScore { get; set; }
         public int AverageScore { get; set; }

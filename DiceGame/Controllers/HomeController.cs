@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DiceGame.Models;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,13 +10,30 @@ namespace DiceGame.Controllers
 {
     public class HomeController : Controller
     {
+        DiceModel db = new DiceModel();
         public ActionResult Index()
         {
+
+            ViewBag.BestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).First();
+            ViewBag.NewBestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).OrderByDescending(z => z.DateBuild).First();
+            // return View(FindOnlines());
             return View();
+        }
+        public List<User> FindOnlines()
+        {
+            using (DiceModel db = new DiceModel())
+            {
+                var onlines = db.Users.Where(u => u.Online == 1).ToList();
+                return onlines;
+            }
+          
         }
 
         public ActionResult AdminIndex()
         {
+           ViewBag.BestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).First();
+           ViewBag.NewBestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).OrderByDescending(z => z.DateBuild).First();
+
             return View();
         }
 
@@ -43,6 +62,10 @@ namespace DiceGame.Controllers
 
         public ActionResult GuestIndex()
         {
+
+            ViewBag.BestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).First();
+            ViewBag.NewBestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).OrderByDescending(z => z.DateBuild).First();
+
             return View();
         }
 

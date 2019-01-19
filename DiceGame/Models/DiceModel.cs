@@ -16,8 +16,8 @@ namespace DiceGame.Models
         public DbSet<Admin> Admins { get; set; }
         public DbSet<OnlineGame> OnlineGames { get; set; }
         public DbSet<FinishedGame> FinishedGames { get; set; }
-        public DbSet<UserComment> NewCommentGames { get; set; }
-        public DbSet<GameComment> NewCommentUsers { get; set; }
+        public DbSet<UserComment> CommentUsers { get; set; }
+        public DbSet<GameComment> CommentGames { get; set; }
        public DbSet<DesignedGame> DesignedGames { get; set; }
     }
 }
