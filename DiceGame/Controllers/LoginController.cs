@@ -31,11 +31,12 @@ namespace DiceGame.Controllers
                 usr.Online = 1;
                 _context.Users.Add(usr);
                 _context.SaveChanges();
-                Session["username"] = _context.Users.Where(u => u.UserName == usr.UserName);
+                Session["username"] = _context.Users.Where(u => u.UserName == usr.UserName).First().UserName;
                 Session["designedGame"] = _context.DesignedGames.Where(d => d.DesignerUser == usr.UserName).ToList();
                 Session["finishedGame1"] = _context.FinishedGames.Where(d => d.Player1User == usr.UserName ).ToList();
                 Session["finishedGame2"] = _context.FinishedGames.Where(d => d.Player2User == usr.UserName).ToList();
                 Session["usr"] = usr;
+                Session["friends"] = usr.Friends;
               //  Session["playedGame"]= _context.
                 return RedirectToAction("Index", "Home");
             }
@@ -62,6 +63,7 @@ namespace DiceGame.Controllers
         {
             Session["username"] = userModel.UserName;
             Session["usr"] = userModel;
+            Session["friends"] = usr.Friends;
             userModel.Online = 1;
             _context.Users.Add(userModel);
             _context.SaveChanges();
