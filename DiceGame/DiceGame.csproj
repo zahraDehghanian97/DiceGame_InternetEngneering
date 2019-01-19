@@ -217,13 +217,12 @@
     <Content Include="Views\Shared\_MyLayout2.cshtml" />
     <Content Include="Views\Home\EditProfile.cshtml" />
     <Content Include="Views\Home\DesignGame.cshtml" />
-    <Content Include="Views\Home\UserReviewAdminIndex.cshtml" />
-    <Content Include="Views\Home\GameReviewAdminIndex.cshtml" />
+    <Content Include="Views\Review\UserReviewAdminIndex.cshtml" />
+    <Content Include="Views\Review\GameReviewAdminIndex.cshtml" />
     <Content Include="Views\Login\logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Review\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

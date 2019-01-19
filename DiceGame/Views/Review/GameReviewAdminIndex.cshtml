@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DiceGame.Models.GameComment>
+@{
+    ViewBag.Title = "GameReview";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Game Review</h3>
+        </div><!-- /col-sm-12 -->
+    </div><!-- /row -->
+    <div class="row">
+        @foreach (var z in Model.ToList())
+        {
+            <div class="col-sm-1">
+                <div class="thumbnail">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                </div><!-- /thumbnail -->
+            </div><!-- /col-sm-1 -->
+            <div class="col-sm-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Html.DisplayFor(m=>z.CommenterUser)
+                    </div>
+                    <div class="panel-body">
+                        @Html.DisplayFor(m=>z.Comment)
+                    </div><!-- /panel-body -->
+                    <div class="panel-footer">
+                        @using (Html.BeginForm("AcceptGameReview", "Review"))
+                        {
+                            <button type="submit" value="z.Id">Accept</button>
+                        }
+                        @using (Html.BeginForm("DeclineGameReview", "Review"))
+                        {
+                            <button type="submit" value="z.Id">Decline</button>
+                        }
+                    </div><!-- /panel-footer -->
+                </div><!-- /panel panel-default -->
+            </div><!-- /col-sm-5 -->
+        }
+
+
+    </div><!-- /row -->
+</div><!-- /container -->

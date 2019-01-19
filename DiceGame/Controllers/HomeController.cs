@@ -13,24 +13,16 @@ namespace DiceGame.Controllers
         DiceModel db = new DiceModel();
         public ActionResult Index()
         {
-
-            ViewBag.BestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).First();
+            ViewBag.BestOnlineGame = from s in db.OnlineGames group s by s.DesignedGameId into g select new { DesignedGameId = g.Key, Max = g.Max(s => s.DesignedGameId) };            ViewBag.BestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).First();
             ViewBag.NewBestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).OrderByDescending(z => z.DateBuild).First();
-            // return View(FindOnlines());
-            return View();
+            return View(db.Users.Where(u => u.Online == 1).AsEnumerable());
+            
         }
-        public List<User> FindOnlines()
-        {
-            using (DiceModel db = new DiceModel())
-            {
-                var onlines = db.Users.Where(u => u.Online == 1).ToList();
-                return onlines;
-            }
-          
-        }
+        
 
         public ActionResult AdminIndex()
         {
+           ViewBag.BestOnlineGame = from s in db.OnlineGames group s by s.DesignedGameId into g select new { DesignedGameId = g.Key, Max = g.Max(s => s.DesignedGameId) };
            ViewBag.BestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).First();
            ViewBag.NewBestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).OrderByDescending(z => z.DateBuild).First();
 
@@ -63,6 +55,7 @@ namespace DiceGame.Controllers
         public ActionResult GuestIndex()
         {
 
+            ViewBag.BestOnlineGame = from s in db.OnlineGames group s by s.DesignedGameId into g select new { DesignedGameId = g.Key, Max = g.Max(s => s.DesignedGameId) };
             ViewBag.BestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).First();
             ViewBag.NewBestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).OrderByDescending(z => z.DateBuild).First();
 
