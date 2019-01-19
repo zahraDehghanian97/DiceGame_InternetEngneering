@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<DiceGame.Models.User>
-@{
-    ViewBag.Title = "Home Page";
-}
 
+@{
+    ViewBag.Title = "AllUsers";
+}
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,7 +11,7 @@
     <style>
         .red {
             color : red ;
-        
+
         }
 
         .card {
@@ -20,66 +20,8 @@
             margin: auto;
             text-align: center;
         }
-
-        .title {
-            color: grey;
-            font-size: 18px;
-        }
-
-        button {
-            border: none;
-            outline: 0;
-            display: inline-block;
-            padding: 8px;
-            color: white;
-            background-color: #000;
-            text-align: center;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-        }
-
-        a {
-            text-decoration: none;
-            font-size: 22px;
-            color: black;
-        }
-
-            button:hover, a:hover {
-                opacity: 0.7;
-            }
-    </style>
-    <script>
-
-    </script>
-</head>
-
-<br />
-
-@{Html.RenderPartial("slider");
-}
-<!--********************************************************************************************************************************************-->
-
-<br />
-
-<div class="jumbotron row ">
-    <h4>Profile Summary</h4>
-    <br />
-    <div class="col-md-4 text-center">
-        <a href='@Url.Action("Index", "Home")' class="fa fa-star-o" style="font-size:48px;"></a>
-
-    </div>
-    <div class="col-md-4 text-center">
-        <a href='@Url.Action("Index", "Home")' class="fa fa-puzzle-piece" style="font-size:48px;"></a>
-        <p>my Score</p>
-    </div>
-    <div class="col-md-4 text-center">
-        <a href='@Url.Action("Index", "Home")' class="fa fa-user-plus" style="font-size:48px;"></a>
-        <p>my Score</p>
-    </div>
-
-</div>
-<!--********************************************************************************************************************************************-->
+</style>
+    </head>
 
 <div class="jumbotron">
     <p>Online Users</p>
@@ -115,19 +57,23 @@
                         <p><button>Add friend</button></p>
                     }
                     else
-                    {   
+                    {
                         <div class="red">
                             @Html.DisplayFor(m => z.UserName)
                         </div>
                     }
+                    <p>score :</p>@Html.DisplayFor(m => z.RateTotal)
+                    <p>win :</p>@Html.DisplayFor(m => z.WinNum)
 
                 }
                 else
                 {
-                    
+
                     @Html.DisplayFor(m => z.UserName)
-                    
-                  
+                    <p>score :</p>@Html.DisplayFor(m => z.RateTotal)
+                    <p>win :</p>@Html.DisplayFor(m => z.WinNum)
+
+
                 }
             }
 
@@ -135,9 +81,5 @@
         }
 
     </div>
-    <div style="float:right">
-        <input type="button" name="response" value="see more" formaction=@Url.Action("Index") class="btn btn-primary" />
-    </div>
 
 </div>
-

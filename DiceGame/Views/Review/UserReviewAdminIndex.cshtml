@@ -47,15 +47,11 @@
 
                     </div><!-- /panel-body -->
                     <div class="panel-footer">
-                        @using (Html.BeginForm("AcceptUserReview", "Review"))
-                        {
-                            <button type="submit" value="z.Id" >Accept</button>
-                        }
-                        @using (Html.BeginForm("DeclineUserReview", "Review"))
-                        {
-                            <button type="submit" value="z.Id">Decline</button>
-                        }
-                        </div><!-- /panel-footer -->
+                  
+                            <input type="button" value="accept" onclick="location.href='@Url.Action("AcceptUserReview", "Review")?id=' + @z.Id" />
+                            <input type="button" value="Decline" onclick="location.href='@Url.Action("DeclineUserReview", "Review")?id=' + @z.Id" />
+                       
+                    </div><!-- /panel-footer -->
                 </div><!-- /panel panel-default -->
             </div><!-- /col-sm-5 -->
         }

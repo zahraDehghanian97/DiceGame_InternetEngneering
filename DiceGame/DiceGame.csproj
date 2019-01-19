@@ -220,6 +220,7 @@
     <Content Include="Views\Review\UserReviewAdminIndex.cshtml" />
     <Content Include="Views\Review\GameReviewAdminIndex.cshtml" />
     <Content Include="Views\Login\logout.cshtml" />
+    <Content Include="Views\Home\AllUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

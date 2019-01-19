@@ -63,7 +63,7 @@ namespace DiceGame.Controllers
         {
             Session["username"] = userModel.UserName;
             Session["usr"] = userModel;
-            Session["friends"] = usr.Friends;
+            Session["friends"] = userModel.Friends;
             userModel.Online = 1;
             _context.Users.Add(userModel);
             _context.SaveChanges();

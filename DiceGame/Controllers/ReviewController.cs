@@ -30,19 +30,36 @@ namespace DiceGame.Views.Login
         }
         public ActionResult AcceptGameReview(int id)
         {
-            return View();
+
+            GameComment com = db.CommentGames.Find(id);
+            db.CommentGames.Remove(com);
+            db.SaveChanges();
+            (db.DesignedGames.Where(x => x.Id == com.GameId).First()).Comments.Add(com);
+            //db.SaveChanges();
+            return RedirectToAction("GameReviewAdminIndex");
         }
         public ActionResult AcceptUserReview(int id)
         {
-            return View();
+            UserComment com = db.CommentUsers.Find(id);
+            db.CommentUsers.Remove(com);
+            db.SaveChanges();
+            (db.Users.Where(x => x.UserName == com.User).First()).comments.Add(com);
+            //db.SaveChanges();
+            return RedirectToAction("UserReviewAdminIndex");
         }
         public ActionResult DeclineUserReview(int id)
         {
-            return View();
+            UserComment com = db.CommentUsers.Find(id);
+            db.CommentUsers.Remove(com);
+            db.SaveChanges();
+            return RedirectToAction("UserReviewAdminIndex");
         }
         public ActionResult DeclineGameReview(int id)
         {
-            return View();
+            GameComment com = db.CommentGames.Find(id);
+            db.CommentGames.Remove(com);
+            db.SaveChanges();
+            return RedirectToAction("GameReviewAdminIndex");
         }
     }
 }

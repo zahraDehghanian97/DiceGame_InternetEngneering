@@ -31,14 +31,10 @@
                         @Html.DisplayFor(m=>z.Comment)
                     </div><!-- /panel-body -->
                     <div class="panel-footer">
-                        @using (Html.BeginForm("AcceptGameReview", "Review"))
-                        {
-                            <button type="submit" value="z.Id">Accept</button>
-                        }
-                        @using (Html.BeginForm("DeclineGameReview", "Review"))
-                        {
-                            <button type="submit" value="z.Id">Decline</button>
-                        }
+
+                        <input type="button" value="accept" onclick="location.href='@Url.Action("AcceptGameReview", "Review")?id=' + @z.Id" />
+                        <input type="button" value="Decline" onclick="location.href='@Url.Action("DeclineGameReview", "Review")?id=' + @z.Id" />
+
                     </div><!-- /panel-footer -->
                 </div><!-- /panel panel-default -->
             </div><!-- /col-sm-5 -->

@@ -18,6 +18,10 @@ namespace DiceGame.Controllers
             return View(db.Users.Where(u => u.Online == 1).AsEnumerable());
             
         }
+        public ActionResult AllUsers()
+        {
+            return View(db.Users.AsEnumerable());
+        }
         
 
         public ActionResult AdminIndex()
