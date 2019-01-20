@@ -5,16 +5,10 @@
 
 .body {
     background-image: url('../images/back.jpg');
-    height: 1000px;
-    width: 2000px;
-    background-image: url("../images/back.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     text-align: center;
-    width: 250px;
-    ; /* or whatever width you want. */
-    max-width: 250px; /* or whatever width you want. */
     display: inline-block;
 }
 

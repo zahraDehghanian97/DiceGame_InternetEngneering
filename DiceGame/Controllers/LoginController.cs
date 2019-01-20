@@ -26,10 +26,12 @@ namespace DiceGame.Controllers
             User usr = _context.Users.Where(u => u.UserName == username && u.Password == password).FirstOrDefault();
             if (usr != null)
             {
-                _context.Users.Remove(usr);
+                _context.Users.Where(u => u.UserName == username && u.Password == password).First().Online = 1;
+                /*_context.Users.Remove(usr);
                 _context.SaveChanges();
                 usr.Online = 1;
                 _context.Users.Add(usr);
+                */
                 _context.SaveChanges();
                 Session["username"] = _context.Users.Where(u => u.UserName == usr.UserName).First().UserName;
                 Session["designedGame"] = _context.DesignedGames.Where(d => d.DesignerUser == usr.UserName).ToList();
@@ -82,10 +84,12 @@ namespace DiceGame.Controllers
             User usr = _context.Users.Where(u => u.UserName == x).FirstOrDefault();
             if ( usr!= null)
             {
-                _context.Users.Remove(usr);
+                _context.Users.Where(u => u.UserName == x).First().Online = 0;
+                /*_context.Users.Remove(usr);
                 _context.SaveChanges();
                 usr.Online = 0;
                 _context.Users.Add(usr);
+                */
                 _context.SaveChanges();
 
 
