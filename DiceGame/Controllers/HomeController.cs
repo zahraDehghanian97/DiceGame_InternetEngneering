@@ -50,6 +50,14 @@ namespace DiceGame.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult DesignGameSave(DesignedGame d)
+        {
+            d.DesignerUser = (string)Session["username"];
+            db.DesignedGames.Add(d);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
         public ActionResult Slider()
         {
