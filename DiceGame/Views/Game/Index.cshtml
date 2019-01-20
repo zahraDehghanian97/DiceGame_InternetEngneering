@@ -1,0 +1,74 @@
+﻿
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="../Content/game.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="body" style=" background-image: url('../images/back.jpg');height:100%;width:100%;">
+    <div id="board" class="gameBoard">
+
+        <div class=" col">
+            <div class="player">
+                <p>
+                    PLAYER 0
+                    <img id="dot0" class="dot display" src="../images/dot.png">
+                </p>
+                <p class="score" id="score0">
+                <p id="roundScore0">0</p>
+                </p>
+            </div>
+            <div id="current0" class="current">
+                CURRENT
+                <p id="currentScore0" class="roundScore">0</p>
+            </div>
+        </div>
+        <div class="col">
+            <span>
+                <button class="button" id="NEWGAME">
+                    <i id="fonticon" class="fa fa-plus-circle"></i> NEW GAME
+                </button>
+            </span>
+            <!--<span aria-hidden="true" data-icon="&#xe984;"></span>-->
+
+            <p id="dice1">
+                <img src="../images/dice-2.png" class="nodisplay placeholder"></a>
+            </p>
+
+            <Span>
+                <button class="button" id="ROLLDICE">
+                    <i id="fonticon" class="fa fa-retweet"></i>
+                    <!--<span aria-hidden="true" data-icon="&#xe97d;"></span> -->
+                    ROLL DICE
+                </button>
+            </Span>
+            <span>
+                <button id="hold" class="button">
+                    <i id="fonticon" class="fa fa-download"></i>
+                    <!--<span aria-hidden="true" data-icon="&#xe984;"></span>-->
+                    HOLD
+                </button>
+            </span>
+            <span>
+                <input style="width : 80px" placeholder="score" id="maxScore" type="number" class="scoreButton">
+            </span>
+            <script src="../Content/dice.js"></script>
+        </div>
+        <div class="col">
+            <div class="player">
+                <p>
+                    PLAYER 1
+                    <img id="dot1" class="dot nodisplay" src="../images/dot.png">
+                </p>
+                <p id="score1" class="score">
+                <p id="roundScore1">0</p>
+                </p>
+            </div>
+            <div id="current1" class="current">
+                CURRENT
+                <p id="currentScore1" class="roundScore">0</p>
+            </div>
+        </div>
+    </div>
+</div>

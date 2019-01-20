@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -174,10 +175,22 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dice.js" />
+    <Content Include="Content\game.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\0.png" />
+    <Content Include="images\1.png" />
+    <Content Include="images\back.jpg" />
+    <Content Include="images\dice-1.png" />
+    <Content Include="images\dice-2.png" />
+    <Content Include="images\dice-3.png" />
+    <Content Include="images\dice-4.png" />
+    <Content Include="images\dice-5.png" />
+    <Content Include="images\dice-6.png" />
+    <Content Include="images\dot.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -221,6 +234,7 @@
     <Content Include="Views\Review\GameReviewAdminIndex.cshtml" />
     <Content Include="Views\Login\logout.cshtml" />
     <Content Include="Views\Home\AllUsers.cshtml" />
+    <Content Include="Views\Game\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
