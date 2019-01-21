@@ -87,7 +87,8 @@ namespace DiceGame.Controllers
 
         public ActionResult EditProfile()
         {
-            return View();
+            var z = Session["username"].ToString();
+            return View(db.Users.Where(u=>u.UserName==z).FirstOrDefault());
         }
 
         public ActionResult UploadFile()

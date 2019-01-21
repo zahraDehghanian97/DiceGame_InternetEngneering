@@ -38,8 +38,10 @@ namespace DiceGame.Controllers
                 Session["finishedGame1"] = _context.FinishedGames.Where(d => d.Player1User == usr.UserName ).ToList();
                 Session["finishedGame2"] = _context.FinishedGames.Where(d => d.Player2User == usr.UserName).ToList();
                 Session["usr"] = usr;
+                Session["mean"] = _context.Users.Where(u => u.UserName == usr.UserName).First().RateMean;
+                Session["all"] = _context.Users.Where(u => u.UserName == usr.UserName).First().RateNum;
+                Session["win"] = _context.Users.Where(u => u.UserName == usr.UserName).First().WinNum;
                 Session["friends"] = usr.Friends;
-              //  Session["playedGame"]= _context.
                 return RedirectToAction("Index", "Home");
             }
             else if (_context.Admins.Where(u => u.Username == username && u.Password == password).Any())
@@ -53,7 +55,23 @@ namespace DiceGame.Controllers
 
             
         }
+        public ActionResult save(User userModel)
+        {
+            if (userModel.UserName == Session["username"].ToString())
+            {
+                Session["username"] = userModel.UserName;
+                Session["usr"] = userModel;
+                _context.Users.Where(u => u.UserName == userModel.UserName).First().UserName = userModel.UserName;
+                _context.Users.Where(u => u.UserName == userModel.UserName).First().FirstName = userModel.FirstName;
+                _context.Users.Where(u => u.UserName == userModel.UserName).First().LastName = userModel.LastName;
+                _context.Users.Where(u => u.UserName == userModel.UserName).First().Gender = userModel.Gender;
+                _context.Users.Where(u => u.UserName == userModel.UserName).First().Email = userModel.Email;
+                _context.Users.Where(u => u.UserName == userModel.UserName).First().Password = userModel.Password;
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index", "Home");
 
+        }
         
         public ActionResult signUp()
         {
@@ -66,6 +84,9 @@ namespace DiceGame.Controllers
             Session["username"] = userModel.UserName;
             Session["usr"] = userModel;
             Session["friends"] = userModel.Friends;
+            Session["mean"] = 0;
+            Session["all"] = 0;
+            Session["win"] = 0;
             userModel.Online = 1;
             _context.Users.Add(userModel);
             _context.SaveChanges();
@@ -76,9 +97,8 @@ namespace DiceGame.Controllers
         {
             return View();
         }
-
-        [HttpPost]
-        public ActionResult Logout()
+        
+        public ActionResult Logout1()
         {
             var x = (string)Session["username"];
             User usr = _context.Users.Where(u => u.UserName == x).FirstOrDefault();
@@ -95,7 +115,7 @@ namespace DiceGame.Controllers
 
             }
             Session.Clear();
-            return View();
+            return RedirectToAction("Index","Home");
         }
 
 

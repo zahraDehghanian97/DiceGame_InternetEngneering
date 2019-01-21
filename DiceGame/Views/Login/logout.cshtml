@@ -4,10 +4,9 @@
 }
 
 <h2>logout</h2>
-see you soon ...
-@using (Html.BeginForm("Logout", "Login"))
-{
-    <button type="submit" class="btn btn-primary">logout</button>
+<br /><br />
+<h4>Are You sure ???</h4>
+<br /><br /><br /><br />
+<input type="button" name="addFriend" value="return Home" onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-success btn-block">
 
-}
-
+<input type="button" name="addFriend" value="logout" onclick="location.href='@Url.Action("Logout1", "Login")'" class="btn btn-danger btn-block">
