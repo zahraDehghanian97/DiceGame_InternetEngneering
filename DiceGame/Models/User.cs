@@ -19,8 +19,11 @@ namespace DiceGame.Models
         {
             this.comments = new List<UserComment>();
             this.Friends = new List<string>();
-            //this.Games = new HashSet<Game>();
-            //this.Users1 = new HashSet<User>();
+            this.WinNum = 0;
+            this.RateMean =0;
+            this.RateNum = 0;
+            this.RateTotal = 0;
+            this.RateMean = 0;
             //this.Users = new HashSet<User>();
         }
     
@@ -32,7 +35,6 @@ namespace DiceGame.Models
         public string BirthDay { get; set; }
         public string Gender { get; set; }
         public string Email { get; set; }
-        public int age { get; set; }
         public Nullable<int> WinNum { get; set; }
         public Nullable<int> RateTotal { get; set; }
         public Nullable<int> RateNum { get; set; }

@@ -39,7 +39,18 @@ namespace DiceGame.Controllers
 
             return View();
         }
-
+        public ActionResult AddFriend1(string friend)
+        {
+            db.Users.Where(u => u.UserName == Session["username"]).First().Friends.Add(friend);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult AddFriend2(string friend)
+        {
+            db.Users.Where(u => u.UserName == Session["username"]).First().Friends.Add(friend);
+            db.SaveChanges();
+            return RedirectToAction("AllUsers");
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
