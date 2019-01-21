@@ -14,7 +14,12 @@ namespace DiceGame.Controllers
         // GET: Game
         public ActionResult Index()
         {
-            ViewBag.IdGame = 1;
+            ViewBag.IdGame = Session["gameid"];
+            return View();
+        }
+        public ActionResult TwoDice ()
+        {
+            ViewBag.IdGame = Session["gameid"];
             return View();
         }
         public ActionResult play(int id)
@@ -29,7 +34,8 @@ namespace DiceGame.Controllers
                 db.OnlineGames.Add(o);
                 db.SaveChanges();
                 Session["gameid"] = db.OnlineGames.Where(u=>u.Player2User==s).First().Id;
-                return RedirectToAction("Index", "Game");
+                if (db.DesignedGames.Where(u => u.Id == id).First().DiceCount == 1) { return RedirectToAction("Index", "Game"); }
+                else { return RedirectToAction("TwoDice", "Game"); }
             }
             else {
                 WaitedGame w = new WaitedGame();

@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "TwoDice";
+}
+<link rel="stylesheet" href="../Content/game.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="body" style=" background-image: url('../images/back.jpg');height:700px;width:1100px;">
+    <div id="board" class="gameBoard">
+
+        <div class=" col">
+            <div class="player">
+                <p>
+                    PLAYER 0
+                    <img id="dot0" class="dot display" src="../images/dot.png">
+                </p>
+                <p class="score" id="score0">
+                <p id="roundScore0">0</p>
+                </p>
+            </div>
+            <div id="current0" class="current">
+                CURRENT
+                <p id="currentScore0" class="roundScore">0</p>
+            </div>
+        </div>
+        <div class="col">
+            <span>
+                <button class="button" id="NEWGAME">
+                    <i id="fonticon" class="fa fa-plus-circle"></i> NEW GAME
+                </button>
+            </span>
+            <!--<span aria-hidden="true" data-icon="&#xe984;"></span>-->
+
+            <p id="dice1">
+                <img src="../images/dice-2.png" class="nodisplay placeholder"></a>
+            </p>
+            <p id="dice2">
+                <img src="../images/dice-2.png" class="nodisplay placeholder"></a>
+            </p>
+
+            <Span>
+                <button class="button" id="ROLLDICE">
+                    <i id="fonticon" class="fa fa-retweet"></i>
+                    <!--<span aria-hidden="true" data-icon="&#xe97d;"></span> -->
+                    ROLL DICE
+                </button>
+            </Span>
+            <span>
+                <button id="hold" class="button">
+                    <i id="fonticon" class="fa fa-download"></i>
+                    <!--<span aria-hidden="true" data-icon="&#xe984;"></span>-->
+                    HOLD
+                </button>
+            </span>
+            <span>
+                <input style="width : 80px" placeholder="score" id="maxScore" type="number" class="scoreButton">
+            </span>
+
+        </div>
+        <div class="col">
+            <div class="player">
+                <p>
+                    PLAYER 1
+                    <img id="dot1" class="dot nodisplay" src="../images/dot.png">
+                </p>
+                <p id="score1" class="score">
+                <p id="roundScore1">0</p>
+                </p>
+            </div>
+            <div id="current1" class="current">
+                CURRENT
+                <p id="currentScore1" class="roundScore">0</p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+    var dice = {
+            sides: 6,
+            roll: function () {
+                var randomNumber = Math.floor(Math.random() * this.sides) + 1;
+                return randomNumber;
+            },
+            defaultRoll: function () {
+                var placeholder = document.getElementById('dice1');
+                placeholder.classList.remove("display");
+                placeholder.classList.add("nodisplay");
+                var placeholder = document.getElementById('dice2');
+                placeholder.classList.remove("display");
+                placeholder.classList.add("nodisplay");
+            }
+        }
+
+
+
+        //Prints dice roll to the page
+        function win(number) {
+            alert('Player ' + number + ' wins !!!!');
+            alert('The Game wil be reset');
+            current = 0;
+            turn = 0;
+            score0 = 0;
+            score1 = 0;
+            document.getElementById('roundScore0').innerHTML = 0;
+            document.getElementById('roundScore1').innerHTML = 0;
+            document.getElementById('currentScore0').innerHTML = 0;
+            document.getElementById('currentScore1').innerHTML = 0;
+            CURRENT = document.getElementById('currentScore0');
+            SCORE = document.getElementById('roundScore0');
+            var dot = document.getElementById("dot1");
+            dot.classList.remove("display");
+            dot.classList.add("nodisplay");
+            var dot = document.getElementById("dot0");
+            dot.classList.remove("nodisplay");
+            dot.classList.add("display");
+            result = dice.defaultRoll();
+            BOARD.style.backgroundImage = 'url("../images/' + turn + '.png")';
+        };
+        function rolldice1(number) {
+            var placeholder = document.getElementById('dice1');
+            placeholder.classList.remove("nodisplay");
+            placeholder.classList.add("display");
+            placeholder.innerHTML = '<img src="../images/dice-' + number + '.png" class="placeholder"></a>';
+        };
+        function rolldice2(number) {
+            var placeholder = document.getElementById('dice2');
+            placeholder.classList.remove("nodisplay");
+            placeholder.classList.add("display");
+            placeholder.innerHTML = '<img src="../images/dice-' + number + '.png" class="placeholder"></a>';
+        };
+        var before = 0;
+        var current = 0;
+        var turn = 0;
+        var score0 = 0;
+        var score1 = 0;
+        var topScore = 15;
+        var BOARD = document.getElementById('board');
+        var MAXSCORE = document.getElementById('maxScore');
+        MAXSCORE.innerHTML = 'score';
+        var ROLLDICE = document.getElementById('ROLLDICE');
+        var HOLD = document.getElementById('hold');
+        var CURRENT = document.getElementById('currentScore' + turn);
+        var SCORE = document.getElementById('roundScore' + turn);
+        HOLD.onclick = function () {
+            // if(MAXSCORE.innerHTML!="score")
+            //     topScore = MAXSCORE.innerHTML.parseInt()-1;
+            if (turn == 0) {
+                score0 = current + score0;
+                SCORE.innerHTML = score0;
+                if (score0 > topScore)
+                    win(0);
+            }
+            else {
+                score1 = current + score1;
+                SCORE.innerHTML = score1;
+                if (score1 > topScore)
+                    win(1);
+            }
+            current = 0;
+            CURRENT.innerHTML = current;
+            var dot = document.getElementById("dot" + turn);
+            dot.classList.remove("display");
+            dot.classList.add("nodisplay");
+            turn = (turn + 1) % 2;
+            var dot = document.getElementById("dot" + turn);
+            dot.classList.remove("nodisplay");
+            dot.classList.add("display");
+            SCORE = document.getElementById('roundScore' + turn);
+            CURRENT = document.getElementById('currentScore' + turn);
+            BOARD.style.backgroundImage = 'url("../images/' + turn + '.png")';
+
+        }
+        ROLLDICE.onclick = function () {
+            var result1 = dice.roll();
+            var result2 = dice.roll();
+            if (result1 == 6 && result2 == 6) {
+                if (turn == 0) {
+                    score0 = 0;
+                }
+                else {
+                    score1 = 0;
+                }
+                SCORE.innerHTML = 0;
+            }
+            if (result1 == 1 || result2 == 1 || (result1 == 6 && result2 == 6)) {
+                rolldice1(result1);
+                rolldice2(result2);
+                var dot = document.getElementById("dot" + turn);
+                dot.classList.remove("display");
+                dot.classList.add("nodisplay");
+                turn = (turn + 1) % 2;
+                var dot = document.getElementById("dot" + turn);
+                dot.classList.remove("nodisplay");
+                dot.classList.add("display");
+                current = 0;
+                before = 1;
+                CURRENT.innerHTML = "0";
+                SCORE = document.getElementById('roundScore' + turn);
+                CURRENT = document.getElementById('currentScore' + turn);
+                BOARD.style.backgroundImage = 'url("../images/' + turn + '.png")';
+
+            }
+            else {
+                rolldice1(result1);
+                rolldice2(result2);
+                current = current + result1 + result2;
+                CURRENT.innerHTML = current;
+
+
+            }
+
+        };
+
+        var NEWGAME = document.getElementById('NEWGAME');
+        NEWGAME.onclick = function () {
+            current = 0;
+            turn = 0;
+            score0 = 0;
+            score1 = 0;
+            document.getElementById('roundScore0').innerHTML = 0;
+            document.getElementById('roundScore1').innerHTML = 0;
+            document.getElementById('currentScore0').innerHTML = 0;
+            document.getElementById('currentScore1').innerHTML = 0;
+            CURRENT = document.getElementById('currentScore0');
+            SCORE = document.getElementById('roundScore0');
+            result = dice.defaultRoll();
+            var dot = document.getElementById("dot1");
+            dot.classList.remove("display");
+            dot.classList.add("nodisplay");
+            var dot = document.getElementById("dot0");
+            dot.classList.remove("nodisplay");
+            dot.classList.add("display");
+            BOARD.style.backgroundImage = 'url("../images/' + turn + '.png")';
+            //rolldice(result);
+        };
+
+    </script>
+
