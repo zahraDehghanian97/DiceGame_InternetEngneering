@@ -16,8 +16,9 @@
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             max-width: 300px;
-            margin: auto;
+            margin: 10px;
             text-align: center;
+
         }
 
         .title {
@@ -54,91 +55,112 @@
 </head>
 
 <br />
-
-@{Html.RenderPartial("slider");
-}
-<!--********************************************************************************************************************************************-->
-
-<br />
 @{if (!string.IsNullOrEmpty(Session["username"] as string))
-    {
-<div class="jumbotron row ">
-    <h3><b> @Session["username"]</b> Profile Summary</h3>
-
-   
-    <br />
-    <div class="col-md-4 text-center">
-        <a href='@Url.Action("EditeProfile", "Home")' class="fa fa-star-o" style="font-size:48px;"></a>
-        <p>Score : @Session["mean"]</p>
-    </div>
-    <div class="col-md-4 text-center">
-        <a href='@Url.Action("EditeProfile", "Home")' class="fa fa-puzzle-piece" style="font-size:48px;"></a>
-        <p>Win Game : @Session["win"]</p>
-    </div>
-    <div class="col-md-4 text-center">
-        <a href='@Url.Action("EditProfile", "Home")' class="fa fa-user-plus" style="font-size:48px;"></a>
-        <p>All Game : @Session["all"]</p>
-    </div>
-    <div style="float:right">
-        <input type="button" name="response" value="profile" onclick="location.href='@Url.Action("EditProfile", "Home")'" class="btn btn-primary" />
-    </div>
-
+    {<div style="float:right">
+    <h3>
+        <b>
+            @Html.ActionLink("Exit", "logout", "Login")
+        </b>
+    </h3>
 </div>
-        } }
-        <!--********************************************************************************************************************************************-->
+        <b><h2>Wellcome @Session["username"]</h2></b>
+        
+    }
+    else {
+        <div style="float:right">
+            <h3><b>
+                @Html.ActionLink("signup", "signUp", "Login") / @Html.ActionLink("login", "login", "Login")
+            </b>
+            </h3>
+           
+        </div>
+    }
+    }
+<br><br >
 
-        <div class="jumbotron">
-            <p>Online Users</p>
-            <div class="row">
-                @foreach (var z in Model.ToList())
+            @{Html.RenderPartial("slider");}
+            <!--********************************************************************************************************************************************-->
+
+            <br />
+            @{if (!string.IsNullOrEmpty(Session["username"] as string))
                 {
-                    <div class="card bg-info col-sm-4">
-                        @{if (!string.IsNullOrEmpty(Session["friends"] as string))
-                            {
-                                List<string> friends = (List<string>)Session["friends"];
-                                var flag = 0;
-                                foreach (var f in friends)
+                    <div class="jumbotron row ">
+                        <h3><b> @Session["username"]</b> Profile Summary</h3>
+
+
+                        <br />
+                        <div class="col-md-4 text-center">
+                            <a href='@Url.Action("EditeProfile", "Home")' class="fa fa-star-o" style="font-size:48px;"></a>
+                            <p>Score : @Session["mean"]</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <a href='@Url.Action("EditeProfile", "Home")' class="fa fa-puzzle-piece" style="font-size:48px;"></a>
+                            <p>Win Game : @Session["win"]</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <a href='@Url.Action("EditProfile", "Home")' class="fa fa-user-plus" style="font-size:48px;"></a>
+                            <p>All Game : @Session["all"]</p>
+                        </div>
+                        <div style="float:right">
+                            <input type="button" name="response" value="profile" onclick="location.href='@Url.Action("EditProfile", "Home")'" class="btn btn-primary" />
+                        </div>
+
+                    </div>
+                } }
+            <!--********************************************************************************************************************************************-->
+
+            <div class="jumbotron">
+                <p>Online Users</p>
+                <div class="row">
+                    @foreach (var z in Model.ToList())
+                    {
+                        <div class="card bg-info col-sm-4">
+                            @{if (!string.IsNullOrEmpty(Session["friends"] as string))
                                 {
-                                    if (z.UserName == f)
+                                    List<string> friends = (List<string>)Session["friends"];
+                                    var flag = 0;
+                                    foreach (var f in friends)
                                     {
-                                        flag = 1;
+                                        if (z.UserName == f)
+                                        {
+                                            flag = 1;
+                                        }
                                     }
+                                    if (flag == 0)
+                                    {
+                                        @Html.DisplayFor(m => z.UserName);
+                                        <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
+                                        <p><button>Add friend</button></p>
+                                    }
+                                    else
+                                    {
+                                        <div class="red">
+                                            @Html.DisplayFor(m => z.UserName)
+                                        </div>
+                                    }
+
                                 }
-                                if (flag == 0)
+                                else if (!string.IsNullOrEmpty(Session["username"] as string))
                                 {
-                                    @Html.DisplayFor(m => z.UserName);
+
+
+                                    @Html.DisplayFor(m => z.UserName)
                                     <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
-                                    <p><button>Add friend</button></p>
+
                                 }
                                 else
                                 {
-                                    <div class="red">
-                                        @Html.DisplayFor(m => z.UserName)
-                                    </div>
+                                    @Html.DisplayFor(m => z.UserName)
                                 }
-
                             }
-                            else if (!string.IsNullOrEmpty(Session["username"] as string))
-                            {
 
+                        </div>
+                    }
 
-                                @Html.DisplayFor(m => z.UserName)
-                                <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
-
-                            }
-                            else
-                            {
-                                @Html.DisplayFor(m => z.UserName)
-                            }
-                        }
-
-                    </div>
-                }
+                </div>
+                <div style="float:right">
+                    <input type="button" name="response" value="see more" onclick="location.href='@Url.Action("AllUsers", "Home")'" class="btn btn-primary" />
+                </div>
 
             </div>
-            <div style="float:right">
-                <input type="button" name="response" value="see more" onclick="location.href='@Url.Action("AllUsers", "Home")'" class="btn btn-primary" />
-            </div>
-
-        </div>
 
