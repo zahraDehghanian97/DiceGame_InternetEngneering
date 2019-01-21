@@ -18,7 +18,7 @@ namespace DiceGame.Models
         public User()
         {
             this.comments = new List<UserComment>();
-            this.Friends = new List<string>();
+            this.Friend = 0;
             this.WinNum = 0;
             this.RateMean =0;
             this.RateNum = 0;
@@ -42,7 +42,7 @@ namespace DiceGame.Models
         public byte[] Picture { get; set; }
         public int Online { get; set; }
         public IList<UserComment> comments { get; set; }
-        public IList<string> Friends { get; set; }
+        public int Friend { get; set; }
     
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         //public ICollection<Game> Games { get; set; }

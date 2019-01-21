@@ -115,47 +115,33 @@
                     @foreach (var z in Model.ToList())
                     {
                         <div class="card bg-info col-sm-4">
-                            @{if (!string.IsNullOrEmpty(Session["friends"] as string))
-                                {
-                                    List<string> friends = (List<string>)Session["friends"];
-                                    var flag = 0;
-                                    foreach (var f in friends)
+                            @{ if(!string.IsNullOrEmpty(Session["username"] as string))
+                                  {
+                                    if (z.Friend == 0)
                                     {
-                                        if (z.UserName == f)
-                                        {
-                                            flag = 1;
-                                        }
-                                    }
-                                    if (flag == 0)
-                                    {
-                                        @Html.DisplayFor(m => z.UserName);
-                                        <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
-                                        <p><button>Add friend</button></p>
+                            @Html.DisplayFor(m => z.UserName);
+                            <p>
+                                <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
+                            </p>
                                     }
                                     else
                                     {
-                                        <div class="red">
-                                            @Html.DisplayFor(m => z.UserName)
-                                        </div>
+                            <div class="red">
+                                @Html.DisplayFor(m => z.UserName)
+                            </div>
                                     }
-
-                                }
-                                else if (!string.IsNullOrEmpty(Session["username"] as string))
-                                {
-
-
-                                    @Html.DisplayFor(m => z.UserName)
-                                    <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
-
                                 }
                                 else
                                 {
                                     @Html.DisplayFor(m => z.UserName)
                                 }
-                            }
+                                }
+
 
                         </div>
                     }
+
+
 
                 </div>
                 <div style="float:right">

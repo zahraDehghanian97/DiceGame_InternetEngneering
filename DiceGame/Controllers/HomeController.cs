@@ -13,9 +13,26 @@ namespace DiceGame.Controllers
         DiceModel db = new DiceModel();
         public ActionResult Index()
         {
-            ViewBag.BestOnlineGame = from s in db.OnlineGames group s by s.DesignedGameId into g select new { DesignedGameId = g.Key, Max = g.Max(s => s.DesignedGameId) };            ViewBag.BestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).First();
-            ViewBag.NewBestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).OrderByDescending(z => z.DateBuild).First();
-            return View(db.Users.Where(u => u.Online == 1).AsEnumerable());
+            //ViewBag.BestOnlineGame = from s in db.OnlineGames group s by s.DesignedGameId into g select new { DesignedGameId = g.Key, Max = g.Max(s => s.DesignedGameId) };
+            ViewBag.BestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).First().DesignerUser;
+            ViewBag.NewBestDesigner = db.DesignedGames.OrderByDescending(x => x.TotalScore).OrderByDescending(z => z.DateBuild).First().DesignerUser;
+            var all = db.Users.AsEnumerable().ToList();
+            foreach (var l in all)
+            {
+                db.Users.Where(u => u.UserName == l.UserName).First().Friend = 0;
+
+            }
+            if (Session["username"] != null)
+            {
+                var a = Session["username"].ToString();
+
+                var r = db.Friends.Where(u => u.Username == a).AsEnumerable().ToList();
+                foreach (var z in r)
+                {
+                    db.Users.Where(u => u.UserName == z.UsernameFriend).First().Friend = 1;
+                }
+            }
+                return View(db.Users.Where(u => u.Online == 1).AsEnumerable());
             
         }
         public ActionResult AllUsers()
@@ -41,13 +58,19 @@ namespace DiceGame.Controllers
         }
         public ActionResult AddFriend1(string friend)
         {
-            db.Users.Where(u => u.UserName == Session["username"]).First().Friends.Add(friend);
+            Friend f = new Friend();
+            f.Username = Session["username"].ToString();
+            f.UsernameFriend = friend;
+            db.Friends.Add(f);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
         public ActionResult AddFriend2(string friend)
         {
-            db.Users.Where(u => u.UserName == Session["username"]).First().Friends.Add(friend);
+            Friend f = new Friend();
+            f.Username = Session["username"].ToString();
+            f.UsernameFriend = friend;
+            db.Friends.Add(f);
             db.SaveChanges();
             return RedirectToAction("AllUsers");
         }

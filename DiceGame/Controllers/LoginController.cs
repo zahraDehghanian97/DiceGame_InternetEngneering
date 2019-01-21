@@ -41,7 +41,6 @@ namespace DiceGame.Controllers
                 Session["mean"] = _context.Users.Where(u => u.UserName == usr.UserName).First().RateMean;
                 Session["all"] = _context.Users.Where(u => u.UserName == usr.UserName).First().RateNum;
                 Session["win"] = _context.Users.Where(u => u.UserName == usr.UserName).First().WinNum;
-                Session["friends"] = usr.Friends;
                 return RedirectToAction("Index", "Home");
             }
             else if (_context.Admins.Where(u => u.Username == username && u.Password == password).Any())
@@ -83,7 +82,6 @@ namespace DiceGame.Controllers
         {
             Session["username"] = userModel.UserName;
             Session["usr"] = userModel;
-            Session["friends"] = userModel.Friends;
             Session["mean"] = 0;
             Session["all"] = 0;
             Session["win"] = 0;
