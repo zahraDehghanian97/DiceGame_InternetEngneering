@@ -4,6 +4,20 @@
 }
 
 <h2>login</h2>
+<div class="container">
+    @if (!string.IsNullOrEmpty(Session["message"] as string))
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="alert alert-info alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-coffee"></i>
+                @Session["message"]
+            </div>
+        </div><!-- /col-sm-12 -->
+    </div><!-- /row -->
+}
+</div>
 @using (Html.BeginForm("login", "Login"))
 {
     @Html.AntiForgeryToken()
@@ -17,9 +31,9 @@
     </div>
     <div style="float:right">
         <button type="submit" class="btn btn-primary btn-lg">Login</button>
-        </div>
+    </div>
 
-        }
-        <br />
+}
+<br />
 
-        @Html.ActionLink("sign in as a guest", "Index", "Home")
+@Html.ActionLink("sign in as a guest", "Index", "Home")

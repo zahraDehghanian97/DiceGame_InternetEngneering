@@ -72,6 +72,7 @@ namespace DiceGame.Controllers
                 return RedirectToAction("Index");
             }
             else {
+                Session["message"] = "To design game you must login first ! ";
                 return RedirectToAction("login","login");
             }
         }
