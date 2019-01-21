@@ -231,6 +231,7 @@
     <Content Include="Views\Login\logout.cshtml" />
     <Content Include="Views\Home\AllUsers.cshtml" />
     <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\Home\ChooseGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

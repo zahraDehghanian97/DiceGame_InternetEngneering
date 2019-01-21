@@ -25,8 +25,8 @@
             <div class="col-sm-5">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        @Html.DisplayFor(m=>z.CommenterUser)
-                    </div>
+                        @Html.DisplayFor(m => z.CommenterUser); <span class="text-muted">commented about game @Html.DisplayFor(m => z.GameId.ToString())</span>
+</div>
                     <div class="panel-body">
                         @Html.DisplayFor(m=>z.Comment)
                     </div><!-- /panel-body -->

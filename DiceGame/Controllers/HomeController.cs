@@ -95,5 +95,10 @@ namespace DiceGame.Controllers
         {
             return View();
         }
+        public ActionResult ChooseGame()
+        {
+            return View(db.DesignedGames.AsEnumerable());
+
+        }
     }
 }

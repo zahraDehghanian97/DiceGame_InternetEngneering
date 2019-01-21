@@ -89,6 +89,15 @@ HOLD.onclick = function () {
     SCORE = document.getElementById('roundScore' + turn);
     CURRENT = document.getElementById('currentScore' + turn);
     BOARD.style.backgroundImage = 'url("../images/' + turn + '.png")';
+    var json = { t: turn, c1: current, c2: current, s1: score0, s2: score1 };
+    $.ajax({
+        url: "SaveGame",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify(json),
+        contentType: "application/json; charset=utf-8"
+
+    });
 
 }
 
@@ -133,6 +142,15 @@ ROLLDICE.onclick = function () {
 
 
     }
+    var json = { t: turn, c1: current, c2: current, s1: score0, s2: score1 };
+    $.ajax({
+        url: "SaveGame",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify(json),
+        contentType: "application/json; charset=utf-8"
+
+    });
     
 
 

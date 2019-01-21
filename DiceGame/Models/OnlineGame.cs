@@ -15,13 +15,17 @@ namespace DiceGame.Models
     public partial class OnlineGame
     {
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OnlineGame()
+        public OnlineGame(int d,string p1,string p2)
         {
-            Current1 = 0;
-            Current2 = 0;
-            Score1 = 0;
-            Score2 = 0;
-            Turn = 1;
+            this.DesignedGameId = d;
+            this.Player1User = p1;
+            this.Player2User = p2;
+            this.Current1 = 0;
+            this.Current2 = 0;
+            this.Score1 = 0;
+            this. Score2 = 0;
+            this.Turn = 1;
+            this.finished = 0;
 
     }
 

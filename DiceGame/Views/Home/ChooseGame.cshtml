@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DiceGame.Models.DesignedGame>
+@{
+    ViewBag.Title = "ChooseGame";
+}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<h2>Choose Your Game to play </h2>
+<!------ Include the above in your HEAD tag ---------->
+<div class="container">
+    @if (!string.IsNullOrEmpty(Session["message"] as string)){ 
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="alert alert-info alert-dismissable">
+        <a class="panel-close close" data-dismiss="alert">×</a>
+        <i class="fa fa-coffee"></i>
+        @Session["message"]
+            </div>
+        </div><!-- /col-sm-12 -->
+    </div><!-- /row -->
+    }
+    <div class="row">
+        @foreach (var z in Model.ToList())
+        {
+            <div class="col-sm-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <b> Game @Html.DisplayFor(m => z.Id) 
+                    </b></div>
+                    <div class="panel-body">
+                        <p>
+                            Average Score :  @Html.DisplayFor(m => z.AverageScore)
+                        </p>Play Count : @Html.DisplayFor(m => z.CountPlayed)
+                        @if (!string.IsNullOrEmpty(Session["username"] as string))
+                        {
+                            <div style="float:right">
+                                <p>
+                                    <input type="button" value="play" onclick="location.href='@Url.Action("play", "Game")?id=' + @z.Id" class="btn btn-success " />
+                                </p>
+                            </div>
+                        }
+                        </div><!-- /panel-body -->
+
+                    </div><!-- /panel panel-default -->
+            </div><!-- /col-sm-5 -->
+        }
+
+
+    </div><!-- /row -->
+</div><!-- /container -->
