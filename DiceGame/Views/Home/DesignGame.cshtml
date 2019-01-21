@@ -3,6 +3,33 @@
     ViewBag.Title = "DesignGame";
 }
 
+<br />
+@{if (!string.IsNullOrEmpty(Session["username"] as string))
+    {<div style="float:right">
+            <h3>
+                <b>
+                    @Html.ActionLink("Exit", "logout", "Login")
+                </b>
+            </h3>
+        </div>
+        <b><h2>Wellcome @Session["username"]</h2></b>
+
+    }
+    else
+    {
+        <div style="float:right">
+            <h3>
+                <b>
+                    @Html.ActionLink("signup", "signUp", "Login") / @Html.ActionLink("login", "login", "Login")
+                </b>
+            </h3>
+
+        </div>
+    }
+}
+<br><br>
+
+
 <h2>DesignGame</h2>
 @using (Html.BeginForm("DesignGameSave", "Home"))
 {
@@ -19,10 +46,10 @@
     <div class="form-group">
         @Html.Label("3.Play with this number of dice:")
         <br />
-        1: @Html.RadioButtonFor(m => m.DiceCount,1)
-        2: @Html.RadioButtonFor(m => m.DiceCount,2)
-        3: @Html.RadioButtonFor(m => m.DiceCount,3)
-        4: @Html.RadioButtonFor(m => m.DiceCount,4)
+        1: @Html.RadioButtonFor(m => m.DiceCount, 1)
+        2: @Html.RadioButtonFor(m => m.DiceCount, 2)
+        3: @Html.RadioButtonFor(m => m.DiceCount, 3)
+        4: @Html.RadioButtonFor(m => m.DiceCount, 4)
 
 
     </div>

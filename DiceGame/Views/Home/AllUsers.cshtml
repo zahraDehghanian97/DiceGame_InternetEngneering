@@ -10,8 +10,7 @@
         <link href="Content/css.css" rel="stylesheet">*@
     <style>
         .red {
-            color : red ;
-
+            color: red;
         }
 
         .card {
@@ -20,78 +19,104 @@
             margin: 30px;
             text-align: center;
         }
-</style>
-    </head>
+    </style>
+</head>
+
+<br />
+@{if (!string.IsNullOrEmpty(Session["username"] as string))
+    {<div style="float:right">
+            <h3>
+                <b>
+                    @Html.ActionLink("Exit", "logout", "Login")
+                </b>
+            </h3>
+        </div>
+        <b><h2>Wellcome @Session["username"]</h2></b>
+
+    }
+    else
+    {
+        <div style="float:right">
+            <h3>
+                <b>
+                    @Html.ActionLink("signup", "signUp", "Login") / @Html.ActionLink("login", "login", "Login")
+                </b>
+            </h3>
+
+        </div>
+    }
+}
+<br><br>
 
 <div class="jumbotron">
     <p>Online Users</p>
     <div class="row">
         @foreach (var z in Model.ToList())
         {
-        <div class="card col-sm-3">
-            @{if (!string.IsNullOrEmpty(Session["friends"] as string))
-                {
-                    List<string> friends = (List<string>)Session["friends"];
-                    var flag = 0;
-                    foreach (var f in friends)
+            <div class="card col-sm-3">
+                @{if (!string.IsNullOrEmpty(Session["friends"] as string))
                     {
-                        if (z.UserName == f)
+                        List<string> friends = (List<string>)Session["friends"];
+                        var flag = 0;
+                        foreach (var f in friends)
                         {
-                            flag = 1;
+                            if (z.UserName == f)
+                            {
+                                flag = 1;
+                            }
                         }
-                    }
-                    if (flag == 0)
-                    {
+                        if (flag == 0)
+                        {
 
-                        <dt><p>@Html.DisplayFor(m => z.UserName);</p></dt>
-                        <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend2", "Home")?username=' + @z.UserName class="btn btn-success btn-xs" />
+                            <dt><p>@Html.DisplayFor(m => z.UserName);</p></dt>
+                            <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend2", "Home")?username=' + @z.UserName class="btn btn-success btn-xs" />
+
+                        }
+                        else if (!string.IsNullOrEmpty(Session["username"] as string))
+                        {
+
+
+                            <dt><p>@Html.DisplayFor(m => z.UserName)</p></dt>
+                            <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
+
+                        }
+                        else
+                        {
+                            <div class="red">
+                                <dt>
+                                    <p>
+                                        @Html.DisplayFor(m => z.UserName)
+                                    </p>
+                                </dt>
+                            </div>
+                        }
+                        <p><dd>score :@Html.DisplayFor(m => z.RateTotal)</dd></p>
+                        <p><dd>win :@Html.DisplayFor(m => z.WinNum)</dd></p>
 
                     }
+
                     else if (!string.IsNullOrEmpty(Session["username"] as string))
                     {
 
 
-                        <dt><p>@Html.DisplayFor(m => z.UserName)</p></dt>
+                        <p><dt>@Html.DisplayFor(m => z.UserName)</dt></p>
+                        <p><dd>score :@Html.DisplayFor(m => z.RateTotal)</dd></p>
+                        <p><dd>win :@Html.DisplayFor(m => z.WinNum)</dd></p>
                         <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
 
                     }
                     else
                     {
-                        <div class="red">
-                            <dt>
-                                <p>
-                                    @Html.DisplayFor(m => z.UserName)
-                                </p>
-                            </dt>
-                        </div>
+
+                        <p><dt>@Html.DisplayFor(m => z.UserName)</dt></p>
+                        <dd>score :@Html.DisplayFor(m => z.RateTotal)</dd>
+                        <dd>win : @Html.DisplayFor(m => z.WinNum)</dd>
+
+
                     }
-                    <p><dd>score :@Html.DisplayFor(m => z.RateTotal)</dd></p>
-                    <p><dd>win :@Html.DisplayFor(m => z.WinNum)</dd></p>
-
                 }
 
-                else if (!string.IsNullOrEmpty(Session["username"] as string))
-                {
-
-
-                    <p><dt>@Html.DisplayFor(m => z.UserName)</dt></p>
-                    <p><dd>score :@Html.DisplayFor(m => z.RateTotal)</dd></p>
-                    <p><dd>win :@Html.DisplayFor(m => z.WinNum)</dd></p>
-                    <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
-
-                }
-                else
-                {
-
-                    <p><dt>@Html.DisplayFor(m => z.UserName)</dt></p>
-                    <dd>score :@Html.DisplayFor(m => z.RateTotal)</dd>
-                    <dd>win : @Html.DisplayFor(m => z.WinNum)</dd>
-
-
-                }
-            }
-
-        </div>
+            </div>
         }
 
     </div>

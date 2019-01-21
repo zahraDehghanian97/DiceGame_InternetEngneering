@@ -64,10 +64,16 @@ namespace DiceGame.Controllers
         [HttpPost]
         public ActionResult DesignGameSave(DesignedGame d)
         {
-            d.DesignerUser = (string)Session["username"];
-            db.DesignedGames.Add(d);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["username"] != null)
+            {
+                d.DesignerUser = (string)Session["username"];
+                db.DesignedGames.Add(d);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else {
+                return RedirectToAction("login","login");
+            }
         }
 
         public ActionResult Slider()
