@@ -65,8 +65,8 @@
                             </dt>
                         </div>
                     }
-                    <dd>score :</dd>@Html.DisplayFor(m => z.RateTotal)
-                    <dd>win :</dd>@Html.DisplayFor(m => z.WinNum)
+                    <p><dd>score :@Html.DisplayFor(m => z.RateTotal)</dd></p>
+                    <p><dd>win :@Html.DisplayFor(m => z.WinNum)</dd></p>
 
                 }
 
@@ -75,8 +75,8 @@
 
 
                     <p><dt>@Html.DisplayFor(m => z.UserName)</dt></p>
-                    <dd>score :</dd>@Html.DisplayFor(m => z.RateTotal)
-                    <dd>win :</dd>@Html.DisplayFor(m => z.WinNum)
+                    <p><dd>score :@Html.DisplayFor(m => z.RateTotal)</dd></p>
+                    <p><dd>win :@Html.DisplayFor(m => z.WinNum)</dd></p>
                     <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
 
                 }

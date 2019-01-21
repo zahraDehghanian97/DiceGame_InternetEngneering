@@ -157,6 +157,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\WaitedGame.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\UserComment.cs" />
     <Compile Include="Models\GameComment.cs" />

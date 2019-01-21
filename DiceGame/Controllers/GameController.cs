@@ -19,19 +19,23 @@ namespace DiceGame.Controllers
         }
         public ActionResult play(int id)
         {
-           var g = db.DesignedGames.Where(z=> z.Id == id).First();
-
-            if (g.WaitedGame.Count() != 0)
+        if (db.WaitedGames.Where(z => z.DesignedGameId == id).Count() > 0)
             { var s = Session["username"].ToString();
-                OnlineGame o = new OnlineGame(id, g.WaitedGame.First(),s );
-                db.DesignedGames.Where(z => z.Id == id).First().WaitedGame.Remove(g.WaitedGame.First());
+                OnlineGame o = new OnlineGame();
+                o.DesignedGameId = id;
+                o.Player1User = db.WaitedGames.Where(z => z.DesignedGameId == id).First().Username;
+                o.Player2User=  s ;
+                db.WaitedGames.Remove(db.WaitedGames.First());
+                db.OnlineGames.Add(o);
                 db.SaveChanges();
-                Session["gameid"] = id;
+                Session["gameid"] = db.OnlineGames.Where(u=>u.Player2User==s).First().Id;
                 return RedirectToAction("Index", "Game");
             }
             else {
-                var s = Session["username"].ToString();
-                db.DesignedGames.Where(z => z.Id == id).First().WaitedGame.Add(s);
+                WaitedGame w = new WaitedGame();
+                w.Username = Session["username"].ToString();
+                w.DesignedGameId = id;
+                db.WaitedGames.Add(w);
                 db.SaveChanges();
                 Session["message"] = "you added succesfully to game " + id;
                 return RedirectToAction("ChooseGame","Home");

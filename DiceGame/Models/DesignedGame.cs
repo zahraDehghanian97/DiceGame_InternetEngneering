@@ -18,8 +18,7 @@ namespace DiceGame.Models
         public DesignedGame()
         {
             this.Comments = new List<GameComment>();
-            this.WaitedGame = new List<string>();
-        }
+            }
 
         public int Id { get; set; }
         public string DesignerUser { get; set; }
@@ -31,8 +30,7 @@ namespace DiceGame.Models
         public int DiceCount { get; set; }
         public string DateBuild { get; set; }
         public int MaxPartab { get; set; }
-        public IList<GameComment> Comments { get; set; }
-        public IList<string> WaitedGame { get; set; }
-
+        public virtual IList<GameComment> Comments { get; set; }
+        
     }
 }
