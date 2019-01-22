@@ -120,20 +120,22 @@
                                     if (z.Friend == 0)
                                     {
                             @Html.DisplayFor(m => z.UserName);
-                            <p>
-                                <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
-                            </p>
+                                        <p>
+                            <input type="button" name="addFriend" value="Add friend+" onclick="location.href='@Url.Action("AddFriend1", "Home")?username=' + @z.UserName" class="btn btn-success btn-xs" />
+                                            </p>
                                     }
                                     else
                                     {
                             <div class="red">
                                 @Html.DisplayFor(m => z.UserName)
+                                <br>
                             </div>
                                     }
                                 }
                                 else
                                 {
                                     @Html.DisplayFor(m => z.UserName)
+                                    <br >
                                 }
                                 }
 
